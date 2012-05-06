@@ -42,7 +42,7 @@ html, body {
 
 html {
 	background: #111;
-    background:url('../img/wood_2.jpg'), #555a5f;
+    background:url('../img/background.jpg'), #555a5f;
 		-webkit-box-shadow: inset 0px 0px 333px 0px #000000;
 		-moz-box-shadow: inset 0px 0px 333px 0px #000000;
 		box-shadow: inset 0px 0px 333px 0px #000000;
@@ -79,10 +79,6 @@ html {
 #reveal h4.inverted {
 	color: #fff;
 	text-shadow: 0px 0px 2px rgba(0,0,0,0.2);
-}
-
-#reveal span {
-    color: #FFCB3C;
 }
 
 #reveal h1 {
@@ -276,12 +272,12 @@ html {
 	#reveal .controls a {
 		font-size: 30px;
 		position: absolute;
-		opacity: 0.1;
-		color: #fff;
+		opacity: 0.2;
+		color: #000000;
 	}
 		#reveal .controls a.enabled {
-			opacity: 0.6;
-			color: hsl(185, 85%, 70%);
+			opacity: 1.0;
+			color: hsl(360, 85%, 25%);
 
 			text-shadow: 0px 0px 2px hsla(185, 45%, 70%, 0.3);
 		}
