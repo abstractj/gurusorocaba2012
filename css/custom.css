@@ -1,6 +1,14 @@
 #reveal span {
-    color: #FFCB3C;
+	color: #FFCB3C;
 }
 .white .state-background {
 	background: rgba( 255, 255, 255, 1.0 );
+}
+#txtlzr {
+	font-size: 40px;
+	width: 700px;
+	height: 450px;
+	margin-left: 100px;
+	word-spacing:40px;
+	line-height: 48px;
 }
