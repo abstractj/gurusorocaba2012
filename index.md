@@ -1,7 +1,8 @@
-<section>
+This week:
 
-# TorqueBox
+- start preparing my talk at GURU Sorocaba
+-  
 
-### TorqueBox - porque enterprise não precisa ser ruim 
-
-</section>
+Last week:
+- BR Holiday
+- some talks on mvc/security
