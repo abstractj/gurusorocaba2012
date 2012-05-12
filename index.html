@@ -803,6 +803,7 @@ end
 	<code class="java">
 <h6>package br.com.gurusorocaba;
 
+@ApplicationScoped
 public class Beer {  
     //gets e sets 
     public void say(String message)  { // Execução do método </h6>
@@ -900,6 +901,53 @@ end
 
 </section>
 
+<section><div id="main-focus"><span><h1>Autenticação</h1>
+<h2><span>JAAS</span></h2></span>
+</div></section>
+
+<section>
+<h1>Autenticação</h1>
+<h3>torquebox.yml ou auth.yml</h3>
+	<pre>
+		<code><h6>
+auth:
+    default:
+        domain: torquebox
+        credentials:
+        teste: testepassword
+
+</h6></code>
+	</pre>
+</section>
+
+<section>
+<h4>Autenticação</h4>
+	<pre>
+		<code><h6>
+require 'torquebox'
+require 'torquebox-security'
+
+class LoginController < ApplicationController
+  def create
+    usuario = params[:usuario]
+    senha = params[:senha]
+    
+    redirect_to login_path if usuario.blank? || senha.blank?
+    authenticator = TorqueBox::Authentication.default
+    
+    if authenticator.authenticate(usuario, senha)
+      puts "Autenticado com sucesso"
+      redirect_to contatos_path
+    else 
+      mensagem = "Nao autorizado"
+      redirect_to login_path
+    end
+  end
+end
+
+</h6></code>
+	</pre>
+</section>
 
 <section><div id="main-focus"><span><h1>Outras features</h1>
 <h2><span>Autenticação + Websockets</span></h2></span>
