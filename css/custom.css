@@ -4,6 +4,10 @@
 .white .state-background {
 	background: rgba( 255, 255, 255, 1.0 );
 }
+
+.alert-blue .state-background {
+	background: rgba( 0, 0, 255, 0.6 );
+}
 #txtlzr {
 	font-size: 40px;
 	width: 700px;
