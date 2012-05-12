@@ -8,6 +8,16 @@
 .alert-blue .state-background {
 	background: rgba( 0, 0, 255, 0.6 );
 }
+
+.alert-blue .state-background {
+	background: rgba( 0, 0, 255, 0.6 );
+}
+
+#main-focus {
+	position: relative;
+	padding-top: 20%;
+}
+
 #txtlzr {
 	font-size: 40px;
 	width: 700px;

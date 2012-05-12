@@ -30,30 +30,32 @@
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 			<section>
-				<h1>TorqueBox</h1>
-				<h3>porque <span class="python-yellow">enterprise</span> não precisa ser ruim</h3>
 
-				<script>
+				<div id="main-focus"><h1>TorqueBox</h1>
+				<h3>porque <span class="python-yellow">enterprise</span> não precisa ser ruim</h3>
+				</div>	
+			<script>
 				// Delicously hacky. Look away.
 				if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) ) document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
 				</script>
 			</section>
 
 			<section>
-				<h1>@abstractj</h1>
+				<div id="main-focus"><h1>@abstractj</h1></div>
 			</section>
 
 			<section data-state="white">
-				<img src="img/redhat.png">	
+				<div id="main-focus"><img src="img/redhat.png"></div>	
 			</section>
 
 			<section data-state="alert">
-				<h1>DISCLAIMER</h1>
+				<div id="main-focus"><h1>DISCLAIMER</h1></div>
 			</section>
 
 			<section>
 				<h1>Java</h1>
 				<img src="img/darth.png">
+				<p><span><strong>927 JSRs apenas :)</strong></span></p>>
 			</section>
 
 			<section>
@@ -127,10 +129,13 @@
 			<section>
 			<h1>DRY</h1>
 				<img src="img/sparta.png" />
+			<blockquote>
+It is tempting, if the only tool you have is a hammer, to treat everything as if it were a nail -  Abraham Maslow
+			</blockquote>
 			</section>
 			<section>
-			<h1>JRuby</h1>
-			<h2><span>Java + Ruby on Steroids</span></h2>
+			<div id="main-focus"><h1>JRuby</h1>
+			<h2><span>Java + Ruby on Steroids</span></h2></div>
 			</section>
 			<section>
 			<h1>JRuby</h1>
@@ -150,60 +155,81 @@
 
 			</section>
 
-			<section>
-			<blockquote>You get true multithreading that can use all your computer’s cores from one process, plus a virtual machine that’s been tuned for a decade and a half. 
-			</blockquote>
+			<section><div id="main-focus">
+			<span><blockquote>You get true multithreading that can use all your computer’s cores from one process, plus a virtual machine that’s been tuned for a decade and a half. 
+			</blockquote></span>
 				<p align="right">Using JRuby -  Bringing Ruby to Java<p>
+</div>			</section>
+
+			<section>
+<div id="main-focus"><h1>Server Side</h1></div>
+</section>
+
+			<section><h1>Ruby App</h1>
+<img src="img/rubyapp_apache.png" /> 
 			</section>
 
+			<section><h1>Ruby App</h1>
+<img src="img/rubyapp_apache.png" /> 
+<img src="img/rubyapp_crond.png" />
+</section>
+
+			<section><h1>Ruby App</h1>
+<img src="img/rubyapp_resque.png" />
+<img src="img/rubyapp_apache.png" /> 
+<img src="img/rubyapp_crond.png" />
+
+</section>
+
+			<section><h1>Ruby App</h1>
+<img src="img/rubyapp_resque.png" />
+<img src="img/rubyapp_apache.png" /> 
+<img src="img/rubyapp_crond.png" />
+<img src="img/rubyapp_monit.png" />
+</section>
+
 			<section>
-<h1>Server Side</h1></section>
-
-			<section><h1>Ruby App</h1></section>
-
-			<section><h1>Ruby App</h1></section>
-
-			<section><h1>Ruby App</h1></section>
-
-			<section><h1>Ruby App</h1></section>
+			<div id="main-focus"><h1>JBoss</h1>
+			<h2><span>Web</span></h2>
+</div>			</section>
 
 			<section>
-			<h1>JBoss</h1>
-			<h2><span>Tomcat</span></h2>
-			</section>
-
-			<section>
-			<h1>JBoss</h1>
+			<div id="main-focus"><h1>JBoss</h1>
 			<h2><span>HornetQ</span></h2>
-			</section>
+</div>			</section>
 
 			<section>
-			<h1>JBoss</h1>
-			<h2><span>Scheduling</span></h2>
+			<div id="main-focus"><h1>JBoss</h1>
+			<h2><span>Scheduling</span></h2></div>
 			</section>
 
 			<section>	
+			<div id="main-focus">
 			<h1>JBoss</h1>
 			<h2><span>Clustering</span></h2>
-			</section>
+</div>			</section>
 
 			<section>
 				<h1>AS7</h1>
-				<p>Redução do footprint de memória</p>
-				<p>Class loader modular</p>
-				<p>Queda no tempo de startup</p>
-				<p>EE6 compliant</p>
+				<p class="fragment">Redução do footprint de memória</p>
+				<p class="fragment">Class loader modular</p>
+				<p class="fragment">Queda no tempo de startup</p>
+				<p class="fragment">EE6 compliant</p>
 			</section>
 			
 			<section>
+
+			<div id="main-focus">
+
 				<h1>TorqueBox</h1>
-			<span>	<blockquote>The power of JBoss with the expressiveness of Ruby
+<span>	<blockquote>The power of JBoss with the expressiveness of Ruby
 				Jim Crossley - MagicRuby Conference
-</blockquote>	</span>
+</blockquote>	</span></div>
 		</section>
 			
 			<section>
 				<h1>TorqueBox</h1>
+<img src="img/torquebox_stack.png" />
 			</section>
 			
 			<section>
