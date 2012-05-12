@@ -117,22 +117,156 @@
 			<section>
 			<h1>Ruby</h1>
 			<pre>
-				<code>
+				<code><h4>
 		class Beer       
 		    attr_accessor :beer_id, :description, :created_at 
-		end
+		end</h4>
 </pre>
 				</code>
 			</section>
-			<section><h1>DRY</h1></section>
-			<section><h1>JRuby</h1></section>
-			<section><h1>JRuby</h1></section>
+			<section>
+			<h1>DRY</h1>
+				<img src="img/sparta.png" />
+			</section>
+			<section>
+			<h1>JRuby</h1>
+			<h2><span>Java + Ruby on Steroids</span></h2>
+			</section>
+			<section>
+			<h1>JRuby</h1>
+
+			<pre>
+			<code>
+		require 'java' 
+
+		pdf = com.itextpdf.text.Document.new  
+		para = com.itextpdf.text.Paragraph.new 'Brought to you by JRuby'  
+		file = java.io.FileOutputStream.new 'pdf_demo.pdf' 
+		com.itextpdf.text.pdf.PdfWriter.get_instance pdf, file 
+
+		pdf.open  
+		pdf.add para  
+		pdf.close </code></pre>
+
+			</section>
 
 			<section>
 			<blockquote>You get true multithreading that can use all your computer’s cores from one process, plus a virtual machine that’s been tuned for a decade and a half. 
 			</blockquote>
 				<p align="right">Using JRuby -  Bringing Ruby to Java<p>
+			</section>
+
+			<section>
+<h1>Server Side</h1></section>
+
+			<section><h1>Ruby App</h1></section>
+
+			<section><h1>Ruby App</h1></section>
+
+			<section><h1>Ruby App</h1></section>
+
+			<section><h1>Ruby App</h1></section>
+
+			<section>
+			<h1>JBoss</h1>
+			<h2><span>Tomcat</span></h2>
+			</section>
+
+			<section>
+			<h1>JBoss</h1>
+			<h2><span>HornetQ</span></h2>
+			</section>
+
+			<section>
+			<h1>JBoss</h1>
+			<h2><span>Scheduling</span></h2>
+			</section>
+
+			<section>	
+			<h1>JBoss</h1>
+			<h2><span>Clustering</span></h2>
+			</section>
+
+			<section>
+				<h1>AS7</h1>
+				<p>Redução do footprint de memória</p>
+				<p>Class loader modular</p>
+				<p>Queda no tempo de startup</p>
+				<p>EE6 compliant</p>
+			</section>
+			
+			<section>
+				<h1>TorqueBox</h1>
+			<span>	<blockquote>The power of JBoss with the expressiveness of Ruby
+				Jim Crossley - MagicRuby Conference
+</blockquote>	</span>
+		</section>
+			
+			<section>
+				<h1>TorqueBox</h1>
+			</section>
+			
+			<section>
+				<h1>Instalação</h1>
+				<h2><span>TorqueBox do zero</span></h2>
+			</section>
+
+			<section>
+			<h1>Pré-requisitos</h1>
+			<pre><code>
+			➜ java -version
+			java version "1.6.0_07"
+			Java(TM) SE Runtime Environment (build 1.6.0_07-b06-153)
+			Java HotSpot(TM) 64-Bit Server VM (build 1.6.0_07-b06-57, mixed mode)
+</code>	</pre>		</section>
+
+<section>
+<h1>GEM</h1>
+<p>
+<span>➜ jruby -S gem install torquebox torquebox-capistrano-support</span>
+</p>
 </section>
+
+<section>
+<h1>Download</h1>
+	<p align="left">➜ wget http://torquebox.org/release/org/torquebox/torquebox-dist/2.0.3/torquebox-dist-2.0.3-bin.zip
+</p>
+	<p align="left">➜ unzip torquebox-dist-2.0.3-bin.zip</p>
+	<p align="left">➜ export TORQUEBOX_HOME=$PWD/torquebox-dist-2.0.3</p>
+	<p align="left">➜ export JBOSS_HOME=$TORQUEBOX_HOME/jboss</p>
+	<p align="left">➜ export JRUBY_HOME=$TORQUEBOX_HOME/jruby</p>
+	<p align="left">➜ export PATH=$JRUBY_HOME/bin:$PATH</p>
+</section>
+
+<section>
+	<h1>Rails</h1>
+	<h4><span>rails new beer -m $TORQUEBOX_HOME/share/rails/template.rb</span></h4>
+</section>
+
+
+<section>
+	<h1>Estrutura</h1>
+	<h2>Diretórios do TorqueBox</h2>
+</section>
+
+<section>
+<h1>Rake tasks</h1>
+<h4><p>rake torquebox:deploy</p>
+<p>rake torquebox:undeploy</p>
+<p>rake torquebox:run</p></h4>
+</section>
+
+<section>
+<h1>Deployment</h1>
+<h2>Make knobs, not WAR!</h2>
+</section>
+
+<section>
+<h1>beer-knob.yml </h1> 
+<pre><code>application: 
+  root: /Users/Bruno/gurusorocaba/beer
+  environment: development
+</code></pre></section>
 
 
 			<section>
