@@ -233,9 +233,9 @@ It is tempting, if the only tool you have is a hammer, to treat everything as if
 			</section>
 			
 			<section>
-				<h1>Instalação</h1>
+			<div id="main-focus">	<h1>Instalação</h1>
 				<h2><span>TorqueBox do zero</span></h2>
-			</section>
+</div>			</section>
 
 			<section>
 			<h1>Pré-requisitos</h1>
@@ -247,26 +247,26 @@ It is tempting, if the only tool you have is a hammer, to treat everything as if
 </code>	</pre>		</section>
 
 <section>
-<h1>GEM</h1>
+<div id="main-focus"><h1>GEM</h1>
 <p>
 <span>➜ jruby -S gem install torquebox torquebox-capistrano-support</span>
 </p>
-</section>
+</div></section>
 
 <section>
 <h1>Download</h1>
-	<p align="left">➜ wget http://torquebox.org/release/org/torquebox/torquebox-dist/2.0.3/torquebox-dist-2.0.3-bin.zip
+	<p align="left">➜ wget http://torquebox.org/release/org/torquebox/torquebox-dist/<span>2.0.3/torquebox-dist-2.0.3-bin.zip</span>
 </p>
-	<p align="left">➜ unzip torquebox-dist-2.0.3-bin.zip</p>
-	<p align="left">➜ export TORQUEBOX_HOME=$PWD/torquebox-dist-2.0.3</p>
-	<p align="left">➜ export JBOSS_HOME=$TORQUEBOX_HOME/jboss</p>
-	<p align="left">➜ export JRUBY_HOME=$TORQUEBOX_HOME/jruby</p>
-	<p align="left">➜ export PATH=$JRUBY_HOME/bin:$PATH</p>
+	<p align="left">➜ unzip <span>torquebox-dist-2.0.3</span>-bin.zip</p>
+	<p align="left">➜ export <span>TORQUEBOX_HOME=$PWD/torquebox-dist-2.0.3</span></p>
+	<p align="left">➜ export <span>JBOSS_HOME</span>=$TORQUEBOX_HOME/jboss</p>
+	<p align="left">➜ export <span>JRUBY_HOME</span>=$TORQUEBOX_HOME/jruby</p>
+	<p align="left">➜ export <span>PATH</span>=$JRUBY_HOME/bin:$PATH</p>
 </section>
 
 <section>
 	<h1>Rails</h1>
-	<h4><span>rails new beer -m $TORQUEBOX_HOME/share/rails/template.rb</span></h4>
+	<p>rails new beer -m <span>$TORQUEBOX_HOME/share/rails/template.rb</span></p>
 </section>
 
 
