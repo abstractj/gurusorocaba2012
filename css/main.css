@@ -73,6 +73,7 @@ html {
 #reveal h3 { font-size: 56px;	}
 #reveal h4 { font-size: 36px;	}
 #reveal h5 { font-size: 26px;  padding-left: 13%; }
+#reveal h6 { font-size: 26px; line-height: 1.2em;}
 
 #reveal h1.inverted,
 #reveal h2.inverted,
@@ -180,10 +181,10 @@ html {
 	width: 100%;
 	margin: 10px auto;
 
-	text-align: left;
 	font-size: 15px;
-	font-family: monospace;
-	line-height: 1.2em;
+	text-align: left;
+	font-family: HelveticaNeue;
+	line-height: 1.5em;
 
 	word-wrap: break-word;
 
@@ -191,7 +192,7 @@ html {
 }
 
 #reveal code {
-	font-family: monospace;
+	font-family: HelveticaNeue;
 }
 
 #reveal small {

@@ -68,8 +68,6 @@
 			</section>
 
 
-
-
 			<section data-state="alert">
 				<div id="main-focus"><h1>DISCLAIMER</h1></div>
 			</section>
@@ -81,9 +79,9 @@
 			</section>
 
 			<section>
-				<h1>Expressiva?</h1>
+				<h2>Expressiva?</h2>
 				<pre>
-					<code>
+					<code class="java">
 		import java.util.Calendar; 
 		public class Beer { 
 			private Long beerId; 
@@ -141,10 +139,10 @@
 			<section>
 			<h1>Ruby</h1>
 			<pre>
-				<code><h4>
+				<code class="ruby"><h6>
 		class Beer       
 		    attr_accessor :beer_id, :description, :created_at 
-		end</h4>
+		end</h6>
 </pre>
 				</code>
 			</section>
@@ -163,7 +161,8 @@ It is tempting, if the only tool you have is a hammer, to treat everything as if
 			<h1>JRuby</h1>
 
 			<pre>
-			<code>
+			<code class="ruby">
+		<h6>
 		require 'java' 
 
 		pdf = com.itextpdf.text.Document.new  
@@ -173,7 +172,7 @@ It is tempting, if the only tool you have is a hammer, to treat everything as if
 
 		pdf.open  
 		pdf.add para  
-		pdf.close </code></pre>
+		pdf.close </h6></code></pre>
 
 			</section>
 
@@ -261,12 +260,13 @@ It is tempting, if the only tool you have is a hammer, to treat everything as if
 
 			<section>
 			<h1>Pré-requisitos</h1>
-			<pre><code>
+			<pre><code class="no-highlight">
+			<h6>
 			➜ java -version
 			java version "1.6.0_07"
 			Java(TM) SE Runtime Environment (build 1.6.0_07-b06-153)
-			Java HotSpot(TM) 64-Bit Server VM (build 1.6.0_07-b06-57, mixed mode)
-</code>	</pre>		</section>
+			Java HotSpot(TM) 64-Bit Server VM (build 1.6.0_07-b06-57)
+</h6></code>	</pre>		</section>
 
 <section>
 <div id="main-focus"><h1>GEM</h1>
@@ -311,10 +311,10 @@ It is tempting, if the only tool you have is a hammer, to treat everything as if
 
 <section>
 <h1>beer-knob.yml </h1> 
-<pre><code>application: 
+<pre><code class="no-highlight"><h6>application: 
   root: /Users/Bruno/gurusorocaba/beer
   environment: development
-</code></pre>
+</h6></code></pre>
 </section>
 
 <section>
@@ -329,8 +329,8 @@ It is tempting, if the only tool you have is a hammer, to treat everything as if
 <section>
 <h1>Gemfile</h1>
 
-<pre><code>
-source 'http://rubygems.org' 
+<pre><code class="no-highlight">
+<h6>source 'http://rubygems.org' 
  
 gem 'rails', '3.1.1' 
  
@@ -341,7 +341,7 @@ gem 'json'
 gem 'jquery-rails' 
 
 gem <span>'torquebox-rake-support', '2.0.3'</span>
-gem <span>'torquebox', '2.0.3'</span></code></pre>
+gem <span>'torquebox', '2.0.3'</span></h6></code></pre>
 </section>
 
 <section>
@@ -352,7 +352,9 @@ gem <span>'torquebox', '2.0.3'</span></code></pre>
 <section>
 <h1>Caching</h1>
 <pre>
-<code>class BeersController < ApplicationController 
+<code class="ruby">
+
+<h6>class BeersController < ApplicationController 
  
   caches_action :most_popular, :expires_in => 30.seconds 
  
@@ -361,7 +363,7 @@ gem <span>'torquebox', '2.0.3'</span></code></pre>
   end 
  
 end
-</code></pre>
+</h6></code></pre>
 </section>
 
 <section>
@@ -376,7 +378,9 @@ Clustering
 </section>
 
 <section><h1>Internals</h1>
-<pre><code>class TorqueBoxCommand < Thor 
+<pre><code class="ruby">
+
+<h6>class TorqueBoxCommand < Thor 
   map "run" => "start" 
   method_option :clustered, :type => :boolean, 
 
@@ -387,7 +391,7 @@ Clustering
                                       :bind_address => options['bind-address']) 
   end
 end
-
+</h6>
 </code></pre></section>
 
 <section>
@@ -414,12 +418,14 @@ end
 </section>
 
 <section><h1>../application.rb</h1>
-<pre><code>module Beer 
+<pre><code class="ruby">
+
+<h6>module Beer 
  
   class Application < Rails::Application 
     config.cache_store = :torque_box_store
   end 
-end</code></pre>
+end</h6></code></pre>
 
 </section>
 
@@ -430,14 +436,15 @@ end</code></pre>
 
 
 <section><h1>../application.rb</h1>
-<pre><code>
-module Beer 
+<pre><code class="ruby">
+
+<h6>module Beer 
  
   class Application < Rails::Application 
-    config.cache_store = :torque_box_store, {:mode => replicated, :sync =>false}
-  end
-end
-</code></pre>
+    config.cache_store = :torque_box_store, {:mode => replicated, 
+	:sync =>false</h6>
+<end></end>
+<end></end></code></pre>
 </section>
 
 
@@ -449,25 +456,21 @@ end
 <section><h1>Internals</h1>
 
 <pre>
-	<code>
-
-public class RubyJobProxy implements Job { 
- 
-    @Override 
-    public void execute(JobExecutionContext context) throws JobExecutionException { 
-         Ruby ruby = null; 
-         try { 
-             ruby = this.runtimePool.borrowRuntime( resolver.getComponentName() ); 
-             JobComponent job = (JobComponent)resolver.resolve( ruby ); 
-             job.run(); 
-         } catch (Exception e) { 
-             throw new JobExecutionException( e ); 
-         } finally { 
-             if (ruby != null) { 
-                 this.runtimePool.returnRuntime( ruby ); 
-             } 
-         } 
-    } 
+	<code class="java">
+<h6>
+  Ruby ruby = null; 
+  try { 
+      ruby = this.runtimePool.borrowRuntime( resolver.getComponentName()); 
+      JobComponent job = (JobComponent)resolver.resolve( ruby ); 
+      job.run(); 
+  } catch (Exception e) { 
+      throw new JobExecutionException( e ); 
+  } finally { 
+      if (ruby != null) { 
+          this.runtimePool.returnRuntime( ruby ); 
+      } 
+  } 
+</h6>
 </code>
 </pre>
 
@@ -476,25 +479,20 @@ public class RubyJobProxy implements Job {
 <section><h1>Internals</h1>
 
 <pre>
-	<code>
+	<code class="java">
 
-public class RubyJobProxy implements Job { 
- 
-    @Override 
-    public void execute(JobExecutionContext context) throws JobExecutionException { 
-         Ruby ruby = null; 
-         try { 
-             ruby = this.runtimePool.borrowRuntime( resolver.getComponentName() ); 
-             JobComponent job = (JobComponent)resolver.resolve( ruby ); 
-             <h5>job.run();</h5>
-         } catch (Exception e) { 
-             throw new JobExecutionException( e ); 
-         } finally { 
-             if (ruby != null) { 
-                 this.runtimePool.returnRuntime( ruby ); 
-             } 
-         } 
-    } 
+ <h6>Ruby ruby = null; 
+ try { 
+     ruby = this.runtimePool.borrowRuntime( resolver.getComponentName() ); 
+     JobComponent job = (JobComponent)resolver.resolve( ruby ); 
+     job.run(); //chamada do metodo no Ruby
+ } catch (Exception e) { 
+     throw new JobExecutionException( e ); 
+ } finally { 
+     if (ruby != null) { 
+         this.runtimePool.returnRuntime( ruby ); 
+     } 
+ } </h6>
 
 </code>
 </pre>
@@ -504,9 +502,9 @@ public class RubyJobProxy implements Job {
 <section><h1>../app/jobs</h1>
 
 <pre>
-	<code>
+	<code class="ruby">
 
-class JobDemo 
+<h6>class JobDemo 
  
   def initialize 
     #Codigo de inicializacao 
@@ -515,7 +513,7 @@ class JobDemo
   def run 
     # O que você quer executar 
   end 
-end 
+end </h6>
 
 </code>
 </pre>
@@ -525,13 +523,13 @@ end
 <section><h1>../torquebox.yml</h1>
 
 <pre>
-	<code>
+	<code class="no-highlight">
 
-jobs:
+<h6>jobs:
   sync_agenda:
     job:  JobDemo 
     cron: '0 0 12 * * ?'
-end 
+end </h6>
 
 </code>
 </pre>
@@ -564,12 +562,12 @@ E A DE SEUS FAMILIARES
 <section><h1>../torquebox.yml</h1>
 
 <pre>
-	<code>
+	<code class="no-highlight">
 
-/topics/beerTopic
+<h6>/topics/beerTopic
 /queues/queueBeer:
 
-</code>
+</h6></code>
 </pre>
 </section>
 
@@ -577,14 +575,15 @@ E A DE SEUS FAMILIARES
 <section><h1>Tasks</h1>
 
 <pre>
-	<code>
+	<code class="ruby">
 
-class EmailerTask < TorqueBox::Messaging::Task 
+<h6>class EmailerTask < TorqueBox::Messaging::Task 
   def send_welcome(payload) 
     to = "#{payload[:name]} <#{payload[:address]}>" 
     # send welcome email to the user 
   end 
-end 
+end
+</h6> 
 
 </code>
 </pre>
@@ -595,17 +594,18 @@ end
 <section><h1>Tasks</h1>
 
 <pre>
-	<code>
+	<code class="ruby">
 
-class UserController < ApplicationController 
+<h6>class UserController < ApplicationController 
   def register 
     user = User.new(params[:user]) 
  
-    EmailerTask.async(:send_welcome, :address => user.email, :name => user.name) 
+    EmailerTask.async(:send_welcome, :address => user.email, 
+		:name => user.name) 
   end 
 end
 
-
+</h6>
 </code>
 </pre>
 
@@ -615,7 +615,9 @@ end
 <section><h1>Processors</h1>
 
 <pre>
-	<code>
+	<code class="ruby">
+
+<h6>
 include TorqueBox::Messaging 
  
 class PrintHandler < MessageProcessor 
@@ -627,6 +629,8 @@ class PrintHandler < MessageProcessor
   end 
 end
 
+</h6>
+
 </code>
 </pre>
 </section>
@@ -635,8 +639,8 @@ end
 <section><h1>Queues</h1>
 
 <pre>
-	<code>
-include TorqueBox 
+	<code class="ruby">
+<h6>include TorqueBox 
 req = Messaging::Queue.new '/queues/questions' 
 res = Messaging::Queue.new '/queues/answers' 
   
@@ -645,7 +649,7 @@ Thread.new do
   puts res.receive( :timeout => 1000 ) 
 end
 
-</code>
+</h6></code>
 </pre>
 </section>
 
@@ -659,8 +663,8 @@ end
 
 <section><h1>Future</h1>
 <pre>
-	<code>
-
+	<code class="ruby">
+<h6>
 class EmailerTask
  
   def send_welcome(payload) 
@@ -668,6 +672,8 @@ class EmailerTask
     # long running task 
   end 
 end
+
+</h6>
 </code>
 </pre>
 
@@ -676,8 +682,9 @@ end
 <section><h1>Future</h1>
 
 <pre>
-	<code>
+	<code class="ruby">
 
+<h6>
 class EmailerTask
 
   include TorqueBox::Messaging::Backgroundable
@@ -687,7 +694,9 @@ class EmailerTask
     to = "#{payload[:name]} <#{payload[:address]}>" 
     # long running task 
   end 
-end 
+end
+
+</h6> 
 
 </code>
 </pre> 
@@ -697,8 +706,9 @@ end
 <section><h1>Future</h1>
 
 <pre>
-	<code>
-future = @emailTask.send_welcome(:send_welcome) 
+	<code class="ruby">
+
+<h6>future = @emailTask.send_welcome(:send_welcome) 
 
 future.started?
  
@@ -708,7 +718,7 @@ future.error?
 
 future.result
 future.result(10000)
-</code>
+</h6></code>
 </pre>
 
 </section>
@@ -719,8 +729,8 @@ future.result(10000)
 <section><h1>Services</h1>
 
 <pre>
-	<code>
-
+	<code class="ruby">
+<h6>
 class BeerService 
   def initialize 
     @queue = Messaging::Queue.new(“beer”)
@@ -731,7 +741,7 @@ class BeerService
   def stop 
     # O que fazer quando o serviço receber um stop 
   end 
-end 
+end </h6>
 </code>
 </pre>
 
@@ -753,13 +763,13 @@ end
 <section><h1>Services</h1>
 <p>➜ torquebox run <span>--clustered</span></p>
 <p><h2>torquebox.yml</h2></p><pre>
-	<code>
-services:
+	<code class="no-highlight">
+<h6>services:
   BeerService:
     singleton:  true 
 end 
 
-</code>
+</h6></code>
 </pre>
 
 </section>
@@ -775,46 +785,43 @@ end
 <section><h1>Java</h1>
 
 <pre>
-	<code>
-package br.com.javaonebrasil;
+	<code class="java">
+<h6>package br.com.gurusorocaba;
 
 public class Beer {  
     //gets e sets 
-    public void say(String message)  { // Execução do método }
-}
-
-
+    public void say(String message)  { // Execução do método </h6>
 </code>
 </pre>
 
-<h2>Deploy do jar na aplicação</h2>
+<h3>Deploy do jar na aplicação</h3>
 
-<pre><code>app/
+<pre><code class="no-highlight">
+<h6>app/
+<span>lib/beer.jar</span>
 models/
 views/
 controllers/
-lib/beer.jar
-
-</code></pre>
+</h6></code></pre>
 </section>
 
 
 <section><h1>Ruby</h1>
 
 <pre>
-	<code>
-class BeerController < ApplicationController
+	<code class="ruby">
+<h6>class BeerController < ApplicationController
 
     include TorqueBox::Injectors
 
     def create
-      beer = inject( Java::br.com.javaonebrasil.Beer ) 
+      beer = inject( Java::br.com.gurusorocaba.Beer ) 
       beer.say “Ruby is for Java”
     end
 
 end
 
-</code>
+</h6></code>
 </pre>
 
 </section>
@@ -823,14 +830,17 @@ end
 <section><h1>JNDI</h1>
 
 <pre>
-	<code>
+	<code class="ruby">
+
+<h6>
 class MyService 
   include TorqueBox::Injectors 
  
   def initialize opts={} 
     @factory = inject("java:comp/env/jdbc/myDB") 
   end 
-end 
+end
+</h6> 
 </code>
 </pre>
 
@@ -840,7 +850,7 @@ end
 <section><h1>Destinations</h1>
 
 <pre>
-	<code>
+	<code class="ruby">
 
 class MyService 
   include TorqueBox::Injectors
