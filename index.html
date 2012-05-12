@@ -265,27 +265,27 @@ It is tempting, if the only tool you have is a hammer, to treat everything as if
 </section>
 
 <section>
-	<h1>Rails</h1>
+	<div id="main-focus"><h1>Rails</h1>
 	<p>rails new beer -m <span>$TORQUEBOX_HOME/share/rails/template.rb</span></p>
-</section>
+</div></section>
 
 
 <section>
 	<h1>Estrutura</h1>
-	<h2>Diretórios do TorqueBox</h2>
+	<img src="img/server_folder_structure.png" />
 </section>
 
 <section>
-<h1>Rake tasks</h1>
-<h4><p>rake torquebox:deploy</p>
-<p>rake torquebox:undeploy</p>
-<p>rake torquebox:run</p></h4>
+<div id="main-focus"><h1>Rake tasks</h1>
+<h4><p><span>rake torquebox:deploy</span></p>
+<p><span>rake torquebox:undeploy</span></p>
+<p><span>rake torquebox:run</span></p></h4></div>
 </section>
 
 <section>
-<h1>Deployment</h1>
-<h2>Make knobs, not WAR!</h2>
-</section>
+<div id="main-focus"><h1>Deployment</h1>
+<h2><span>Make knobs, not WAR!</span></h2>
+</div></section>
 
 <section>
 <h1>beer-knob.yml </h1> 
@@ -301,19 +301,45 @@ It is tempting, if the only tool you have is a hammer, to treat everything as if
 
 <section>
 <h1>Aplicação</h1>
+<img src="img/app_folder_structure.png" />
 </section>
 
 <section>
 <h1>Gemfile</h1>
+
+<pre><code>
+source 'http://rubygems.org' 
+ 
+gem 'rails', '3.1.1' 
+ 
+gem 'activerecord-jdbcsqlite3-adapter' 
+ 
+gem 'jruby-openssl' 
+gem 'json' 
+gem 'jquery-rails' 
+
+gem <span>'torquebox-rake-support', '2.0.3'</span>
+gem <span>'torquebox', '2.0.3'</span></code></pre>
 </section>
 
 <section>
-<h1>Web</h1>
+<div id="main-focus"><h1>Web</h1>
 <h2><span>Rack, Sinatra, Rails</span></h2>
-</section>
+</div></section>
 
 <section>
 <h1>Caching</h1>
+<pre>
+<code>class BeersController < ApplicationController 
+ 
+  caches_action :most_popular, :expires_in => 30.seconds 
+ 
+  def most_popular 
+    @popular_beers = Beer.most_popular(:limit => 25) 
+  end 
+ 
+end
+</code></pre>
 </section>
 
 <section>
@@ -321,48 +347,137 @@ It is tempting, if the only tool you have is a hammer, to treat everything as if
 </section>
 
 <section>
-<h1>
+<div id="main-focus"><h1>
 Clustering
-</h1>
+<h4>➜ torquebox run <span>--clustered</span></h4>
+</h1></div>
 </section>
 
-<section><h1>Internals</h1></section>
+<section><h1>Internals</h1>
+<pre><code>class TorqueBoxCommand < Thor 
+  map "run" => "start" 
+  method_option :clustered, :type => :boolean, 
 
-<section><h1>Cache distribuído!</h1></section>
+  def start 
+    setup_environment 
+    TorqueBox::DeployUtils.run_server(:clustered => options.clustered, 
+                                      :max_threads => options['max-threads'], 
+                                      :bind_address => options['bind-address']) 
+  end
+end
 
+</code></pre></section>
 
 <section>
-<h1>mod_cluster</h1>
+<div id="main-focus"><h1>Cache distribuído!</h1></div></section>
+
+<section>
+<div id="main-focus"><h1>mod_cluster</h1>
 <h2><span>httpd-based load balancer</span></h2>
-</section>
+</div></section>
 
 
 <section>
-<h1>Infinispan</h1>
+<div id="main-focus"><h1>Infinispan</h1>
 <h2><span>Caching</span></h2>
+</div></section>
+
+
+<section><h1>Invalidation</h1>
+<img src="img/infinispan_invalidation1.png" />
+</section>
+
+<section><h1>Invalidation</h1>
+<img src="img/infinispan_invalidation2.png" />
+</section>
+
+<section><h1>../application.rb</h1>
+<pre><code>module Beer 
+ 
+  class Application < Rails::Application 
+    config.cache_store = :torque_box_store
+  end 
+end</code></pre>
+
 </section>
 
 
-<section><h1>Invalidation</h1></section>
-
-<section><h1>Invalidation</h1></section>
-
-<section><h1>../config/application.rb</h1></section>
+<section><h1>Replicated</h1>
+<img src="img/infinispan_replicated.png" />
+</section>
 
 
-<section><h1>Replicated</h1></section>
-
-
-<section><h1>../config/application.rb</h1></section>
+<section><h1>../application.rb</h1>
+<pre><code>
+module Beer 
+ 
+  class Application < Rails::Application 
+    config.cache_store = :torque_box_store, {:mode => replicated, :sync =>false}
+  end
+end
+</code></pre>
+</section>
 
 
 <section>
-<h1>Scheduling</h1>
+<div id="main-focus"><h1>Scheduling</h1>
 <h2><span>Agendamento de Jobs</span></h2>
-</section>
+</div></section>
 
-<section><h1>Internals</h1></section>
-<section><h1>Internals</h1></section>
+<section><h1>Internals</h1>
+
+<pre>
+	<code>
+
+public class RubyJobProxy implements Job { 
+ 
+    @Override 
+    public void execute(JobExecutionContext context) throws JobExecutionException { 
+         Ruby ruby = null; 
+         try { 
+             ruby = this.runtimePool.borrowRuntime( resolver.getComponentName() ); 
+             JobComponent job = (JobComponent)resolver.resolve( ruby ); 
+             job.run(); 
+         } catch (Exception e) { 
+             throw new JobExecutionException( e ); 
+         } finally { 
+             if (ruby != null) { 
+                 this.runtimePool.returnRuntime( ruby ); 
+             } 
+         } 
+    } 
+</code>
+</pre>
+
+
+</section>
+<section><h1>Internals</h1>
+
+<pre>
+	<code>
+
+public class RubyJobProxy implements Job { 
+ 
+    @Override 
+    public void execute(JobExecutionContext context) throws JobExecutionException { 
+         Ruby ruby = null; 
+         try { 
+             ruby = this.runtimePool.borrowRuntime( resolver.getComponentName() ); 
+             JobComponent job = (JobComponent)resolver.resolve( ruby ); 
+             <h5>job.run();</h5>
+         } catch (Exception e) { 
+             throw new JobExecutionException( e ); 
+         } finally { 
+             if (ruby != null) { 
+                 this.runtimePool.returnRuntime( ruby ); 
+             } 
+         } 
+    } 
+
+</code>
+</pre>
+
+</section>
 
 <section><h1>../app/jobs</h1></section>
 

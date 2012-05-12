@@ -72,6 +72,7 @@ html {
 #reveal h2 { font-size: 76px;	}
 #reveal h3 { font-size: 56px;	}
 #reveal h4 { font-size: 36px;	}
+#reveal h5 { font-size: 26px;  padding-left: 13%; }
 
 #reveal h1.inverted,
 #reveal h2.inverted,
@@ -229,7 +230,7 @@ html {
 	}
 
 #reveal section img {
-	margin: 30px 0 0 0;
+	margin: 10px 0 0 0;
 }
 
 	#reveal a:hover img {
