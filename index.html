@@ -479,15 +479,46 @@ public class RubyJobProxy implements Job {
 
 </section>
 
-<section><h1>../app/jobs</h1></section>
+<section><h1>../app/jobs</h1>
 
-<section><h1>../config/torquebox.yml</h1></section>
+<pre>
+	<code>
 
+class JobDemo 
+ 
+  def initialize 
+    #Codigo de inicializacao 
+  end 
+ 
+  def run 
+    # O que você quer executar 
+  end 
+end 
+
+</code>
+</pre>
+
+</section>
+
+<section><h1>../torquebox.yml</h1>
+
+<pre>
+	<code>
+
+jobs:
+  sync_agenda:
+    job:  JobDemo 
+    cron: '0 0 12 * * ?'
+end 
+
+</code>
+</pre>
+</section>
 
 <section>
-<h1>Mensageria</h1>
+<div id="main-focus"><h1>Mensageria</h1>
 <h2><span>Java Messaging Service + HornetQ</span></h2>
-</section>
+</div></section>
 
 <section data-state="alert-blue">
 <h1>O Ministério da Saúde adverte:</h1>
@@ -501,66 +532,311 @@ E A DE SEUS FAMILIARES
 <section>
 <h1>Greenfield</h1>
 <h2><span>REST + NoSQL</span></h2>
+<img src="img/greenfield.png" />
 </section>
 
-<section><h1>Real World</h1></section>
+<section><h1>Real World</h1>
+<img src="img/realworld.png" />
+</section>
 
-<section><h1>../config/torquebox.yml</h1></section>
+<section><h1>../torquebox.yml</h1>
 
+<pre>
+	<code>
 
-<section><h1>Tasks</h1></section>
+/topics/beerTopic
+/queues/queueBeer:
 
-
-<section><h1>Tasks</h1></section>
-
-
-<section><h1>Processors</h1></section>
-
-
-<section><h1>Queues</h1></section>
-
-
-<section><h1>Future</h1></section>
+</code>
+</pre>
+</section>
 
 
-<section><h1>Future</h1></section>
+<section><h1>Tasks</h1>
 
-<section><h1>Future</h1></section>
+<pre>
+	<code>
 
-<section><h1>Future</h1></section>
+class EmailerTask < TorqueBox::Messaging::Task 
+  def send_welcome(payload) 
+    to = "#{payload[:name]} <#{payload[:address]}>" 
+    # send welcome email to the user 
+  end 
+end 
 
+</code>
+</pre>
 
-<section><h1>Services</h1></section>
-
-<section><h1>Services</h1></section>
-
-
-<section><h1>Singleton Services</h1></section>
-
-<section><h1>Singleton Services</h1></section>
-
-
-<section><h1>Services</h1></section>
+</section>
 
 
-<section><h1>CDI</h1></section>
+<section><h1>Tasks</h1>
 
-<section><h1>Pra quê?</h1></section>
+<pre>
+	<code>
 
-
-<section><h1>Java</h1></section>
-
-
-<section><h1>Ruby</h1></section>
-
-
-<section><h1>JNDI</h1></section>
-
-
-<section><h1>Destinations</h1></section>
+class UserController < ApplicationController 
+  def register 
+    user = User.new(params[:user]) 
+ 
+    EmailerTask.async(:send_welcome, :address => user.email, :name => user.name) 
+  end 
+end
 
 
-<section><h1>Transactions</h1></section>
+</code>
+</pre>
+
+</section>
+
+
+<section><h1>Processors</h1>
+
+<pre>
+	<code>
+include TorqueBox::Messaging 
+ 
+class PrintHandler < MessageProcessor 
+  def on_message(body) 
+    puts "Processing #{body} of #{message}" 
+  end 
+  def configure(opts) 
+    @color = opts['color'] 
+  end 
+end
+
+</code>
+</pre>
+</section>
+
+
+<section><h1>Queues</h1>
+
+<pre>
+	<code>
+include TorqueBox 
+req = Messaging::Queue.new '/queues/questions' 
+res = Messaging::Queue.new '/queues/answers' 
+  
+Thread.new do 
+  req.publish "What time is it?" 
+  puts res.receive( :timeout => 1000 ) 
+end
+
+</code>
+</pre>
+</section>
+
+
+<section><h1>Future</h1>
+
+<img src="img/future.png" />
+
+</section>
+
+
+<section><h1>Future</h1>
+<pre>
+	<code>
+
+class EmailerTask
+ 
+  def send_welcome(payload) 
+    to = "#{payload[:name]} <#{payload[:address]}>" 
+    # long running task 
+  end 
+end
+</code>
+</pre>
+
+</section>
+
+<section><h1>Future</h1>
+
+<pre>
+	<code>
+
+class EmailerTask
+
+  include TorqueBox::Messaging::Backgroundable
+  always_background :send_welcome
+
+  def send_welcome(payload) 
+    to = "#{payload[:name]} <#{payload[:address]}>" 
+    # long running task 
+  end 
+end 
+
+</code>
+</pre> 
+
+</section>
+
+<section><h1>Future</h1>
+
+<pre>
+	<code>
+future = @emailTask.send_welcome(:send_welcome) 
+
+future.started?
+ 
+future.complete?
+ 
+future.error?
+
+future.result
+future.result(10000)
+</code>
+</pre>
+
+</section>
+
+
+<section><div id="main-focus"><h1>Services</h1></div></section>
+
+<section><h1>Services</h1>
+
+<pre>
+	<code>
+
+class BeerService 
+  def initialize 
+    @queue = Messaging::Queue.new(“beer”)
+  end
+  def start 
+    @queue.publish “Testing” 
+  end 
+  def stop 
+    # O que fazer quando o serviço receber um stop 
+  end 
+end 
+</code>
+</pre>
+
+</section>
+
+
+<section><h1>Singleton Services</h1>
+
+<img src="img/singleton_services1.png" />
+</section>
+
+<section><h1>Singleton Services</h1>
+
+<img src="img/singleton_services2.png" />
+
+</section>
+
+
+<section><h1>Services</h1>
+<p>➜ torquebox run <span>--clustered</span></p>
+<p><h2>torquebox.yml</h2></p><pre>
+	<code>
+services:
+  BeerService:
+    singleton:  true 
+end 
+
+</code>
+</pre>
+
+</section>
+
+
+<section><div id="main-focus"><h1>CDI</h1>
+<h2><span>Injeção de dependências</span></h2>
+</div></section>
+
+<section><div id="main-focus"><h1>Pra quê?</h1></div></section>
+
+
+<section><h1>Java</h1>
+
+<pre>
+	<code>
+package br.com.javaonebrasil;
+
+public class Beer {  
+    //gets e sets 
+    public void say(String message)  { // Execução do método }
+}
+
+
+</code>
+</pre>
+
+<h2>Deploy do jar na aplicação</h2>
+
+<pre><code>app/
+models/
+views/
+controllers/
+lib/beer.jar
+
+</code></pre>
+</section>
+
+
+<section><h1>Ruby</h1>
+
+<pre>
+	<code>
+class BeerController < ApplicationController
+
+    include TorqueBox::Injectors
+
+    def create
+      beer = inject( Java::br.com.javaonebrasil.Beer ) 
+      beer.say “Ruby is for Java”
+    end
+
+end
+
+</code>
+</pre>
+
+</section>
+
+
+<section><h1>JNDI</h1>
+
+<pre>
+	<code>
+class MyService 
+  include TorqueBox::Injectors 
+ 
+  def initialize opts={} 
+    @factory = inject("java:comp/env/jdbc/myDB") 
+  end 
+end 
+</code>
+</pre>
+
+</section>
+
+
+<section><h1>Destinations</h1>
+
+<pre>
+	<code>
+
+class MyService 
+  include TorqueBox::Injectors
+ 
+  def initialize opts={} 
+    @inbound = inject("/topic/beerpub")
+    @outbound = inject("/queue/beer") 
+  end 
+end 
+
+</code>
+</pre>
+</section>
+
+
+<section><h1>Transactions</h1>
+<img src="img/transactions.png" />
+</section>
 
 
 <section><h1>XA (2PC)</h1></section>
